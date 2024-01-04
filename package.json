@@ -1,0 +1,23 @@
+{
+  "name": "new-zetkin-org",
+  "version": "1.0.0",
+  "description": "New website for Zetkin Foundation",
+  "main": "index.js",
+  "scripts": {
+    "wp": "wp-env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zetkin/new-zetkin-org.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/zetkin/new-zetkin-org/issues"
+  },
+  "private": true,
+  "homepage": "https://github.com/zetkin/new-zetkin-org#readme",
+  "devDependencies": {
+    "@wordpress/env": "^9.0.0"
+  }
+}
