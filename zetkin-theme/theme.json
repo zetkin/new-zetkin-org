@@ -1,4 +1,43 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/theme.json",
-  "version": 2
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"name": "Black",
+					"slug": "black",
+					"color": "#000000"
+				},
+				{
+					"name": "White",
+					"slug": "white",
+					"color": "#fafaf8"
+				},
+            {
+					"name": "Z red 500",
+					"slug": "z-red-500",
+					"color": "#C81E40"
+				},
+            {
+					"name": "Z purple 500",
+					"slug": "z-purple-500",
+					"color": "#3C006E"
+				},
+            {
+					"name": "Z light green 500",
+					"slug": "z-lightgreen-500",
+					"color": "#6EE1B4"
+				},
+            {
+					"name": "Z dark green 500",
+					"slug": "z-darkgreen-500",
+					"color": "#285046"
+				}
+			]
+		}
+	}
 }
+
+
+
