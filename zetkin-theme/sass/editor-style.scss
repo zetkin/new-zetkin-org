@@ -1,0 +1,6 @@
+/* This is the editor style sheet for the zetkin theme, 
+It imports the same styles as the theme and adds overrides specifik to the editor */
+
+@import "style.scss";
+
+@import "editor/overrides";

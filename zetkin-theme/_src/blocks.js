@@ -1,11 +1,12 @@
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks, InspectorControls, ColorPalette, MediaUpload } = wp.blockEditor;
+const { InnerBlocks, InspectorControls, ColorPalette, MediaUpload } =
+	wp.blockEditor;
 const { PanelBody, Button, SelectControl } = wp.components;
 const { __ } = wp.i18n;
 
 registerBlockType("zetkin/custom-hero03", {
-   title: "Zetkin Custom Hero 03",
-	category: "zetkin/custom",
+	title: "Zetkin Custom Hero 03",
+	category: "zetkin",
 	attributes: {
 		backgroundColor: {
 			type: "string",
@@ -26,10 +27,9 @@ registerBlockType("zetkin/custom-hero03", {
 		backgroundRepeat: {
 			type: "string",
 			default: "no-repeat",
-		}
+		},
 		// Other attributes...
 	},
-
 
 	edit: (props) => {
 		const {
@@ -130,7 +130,11 @@ registerBlockType("zetkin/custom-hero03", {
 					}}
 				>
 					<InnerBlocks
-						allowedBlocks={["core/heading", "core/paragraph"]}
+						allowedBlocks={[
+							"core/heading",
+							"core/paragraph",
+							"zetkin/flex-header",
+						]}
 						template={[
 							["core/heading", { placeholder: "Enter heading..." }],
 							["core/paragraph", { placeholder: "Enter text..." }],
@@ -142,7 +146,13 @@ registerBlockType("zetkin/custom-hero03", {
 	},
 	save: (props) => {
 		const {
-			attributes: {  backgroundColor, backgroundImage, backgroundPosition, backgroundSize, backgroundRepeat },
+			attributes: {
+				backgroundColor,
+				backgroundImage,
+				backgroundPosition,
+				backgroundSize,
+				backgroundRepeat,
+			},
 		} = props;
 
 		return (
@@ -160,4 +170,88 @@ registerBlockType("zetkin/custom-hero03", {
 			</div>
 		);
 	},
+});
+
+registerBlockType("zetkin/flex-header", {
+	icon: "heading",
+	title: "Zetkin Flex Header",
+	category: "zetkin",
+	attributes: {
+		mainFlexHeadColor: {
+			type: "string",
+			default: "mn--blk",
+		},
+		obliqueFlexHeadColor: {
+			type: "string",
+			default: "em--blk",
+		},
+		// Other attributes...
+	},
+	edit: (props) => {
+		const {
+			attributes: { mainFlexHeadColor, obliqueFlexHeadColor },
+			setAttributes,
+		} = props;
+
+		const onChangeMainFlexHeadColor = (newClass) => {
+			setAttributes({ mainFlexHeadColor: newClass });
+		};
+
+		const onChangeObliqueFlexHeadColor = (newClass) => {
+			setAttributes({ obliqueFlexHeadColor: newClass });
+		};
+
+		return (
+			<>
+				<InspectorControls>
+					<PanelBody title="Flex Header Settings" initialOpen={true}>
+						<SelectControl
+							label="Main Header Color"
+							value={mainFlexHeadColor}
+							options={[
+								{ label: "black", value: "mn--blk" },
+								{ label: "White", value: "mn--wht" },
+								{ label: "Red", value: "mn--red" },
+								{ label: "Light Green", value: "mn--ltgrn" },
+                        { label: "Dark Green", value: "mn--dkgrn" },
+								{ label: "Purple", value: "mn--ppl" },
+								// More options...
+							]}
+							onChange={onChangeMainFlexHeadColor}
+						/>
+						<SelectControl
+							label="Oblique Color"
+							value={obliqueFlexHeadColor}
+							options={[
+								{ label: "black", value: "em--blk" },
+								{ label: "White", value: "em--wht" },
+								{ label: "Red", value: "em--red" },
+								{ label: "Light Green", value: "em--ltgrn" },
+                        { label: "Dark Green", value: "em--dkgrn" },
+								{ label: "Purple", value: "em--ppl" },
+								// More options...
+							]}
+							onChange={onChangeObliqueFlexHeadColor}
+						/>
+					</PanelBody>
+				</InspectorControls>
+				<div
+					className={`zetkin_flexHeader ${mainFlexHeadColor} ${obliqueFlexHeadColor}`}
+				>
+					<InnerBlocks
+						template={[["core/paragraph", { placeholder: "Enter heading..." }]]}
+					/>
+				</div>
+			</>
+		);
+	},
+	save: ({ attributes }) => {
+      const { mainFlexHeadColor, obliqueFlexHeadColor } = attributes;
+  
+      return (
+          <div className={`zetkin_flexHeader ${mainFlexHeadColor} ${obliqueFlexHeadColor}`}>
+              <InnerBlocks.Content />
+          </div>
+      );
+  },
 });

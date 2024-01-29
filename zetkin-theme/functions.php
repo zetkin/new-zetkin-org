@@ -177,6 +177,34 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /** 
+ * Encue all .js file in /js/ 
+ */
+function zetkin_enqueue_folder_scripts() {
+   $script_directory = get_template_directory() . '/js/';
+   $script_url = get_template_directory_uri() . '/js/';
+   $script_files = glob($script_directory . '*.js');
+
+   foreach ($script_files as $file) {
+       $file_url = $script_url . basename($file);
+       $file_slug = 'script-' . basename($file, '.js');
+
+       wp_enqueue_script($file_slug, $file_url, array(), false, true);
+   }
+}
+add_action('wp_enqueue_scripts', 'zetkin_enqueue_folder_scripts');
+
+/** 
+ * Add editor stylesheet 
+ */
+function zetkin_setup_theme_supported_features() {
+   add_theme_support( 'editor-styles' ); // Enable editor styles
+   add_theme_support( 'align-wide' ); // Enable wide alignment options for blocks
+   add_editor_style( 'editor-style.css' ); // Add custom editor style
+}
+add_action( 'after_setup_theme', 'zetkin_setup_theme_supported_features' );
+
+
+/** 
  * Added Zetkin category for Gutenberg Patterns 
  */
 add_action( 'init', 'zetkin_register_pattern_categories' );
@@ -188,7 +216,29 @@ function zetkin_register_pattern_categories() {
 	) );
 }
 
+/** 
+ * Added Zetkin category for Gutenberg Blocks 
+ */
+function register_zetkin_block_category( $block_categories, $editor_context ) {
+   if ( ! empty( $editor_context->post ) ) {
+       array_push(
+           $block_categories,
+           array(
+               'slug'  => 'zetkin',
+               'title' => __( 'Zetkin Blocks', 'text-domain' ),
+               'icon'  => 'wordpress', // Optional. Use a Dashicon slug or an SVG.
+           )
+       );
+   }
 
+   return $block_categories;
+}
+add_filter( 'block_categories_all', 'register_zetkin_block_category', 10, 2 );
+
+
+/** 
+ * Added Zetkin blocks for Gutenberg Patterns 
+ */
 function zetkin_enqueue_block_editor_assets() {
    wp_enqueue_script(
        'zetkin-block', // Handle for the script.
@@ -199,4 +249,6 @@ function zetkin_enqueue_block_editor_assets() {
 }
 
 add_action('enqueue_block_editor_assets', 'zetkin_enqueue_block_editor_assets');
+
+
 

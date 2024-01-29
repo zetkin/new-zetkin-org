@@ -3,11 +3,41 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.zetkin_flexHeader p {
 	clear: both;
-   em{
-      font-family: $font__sec;
-      font-style: normal;
-      font-weight: 400;
+	em {
+		font-family: $font__sec;
+		font-style: normal;
+		font-weight: 400;
+	}
+}
+
+.zetkin_flexHeader {
+   //font-size: 750%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   p{
+      padding: 0;
+      margin: 0;
+      font-weight: 700;
+      
+      line-height: .9em;
    }
+   &.mn--blk p{color: $zetkin-blk;}
+   &.mn--wht p{color: $zetkin-wht;}
+   &.mn--red p{color: $zetkin-red;}
+   &.mn--ltgrn p{color: $zetkin-ltgrn;}
+   &.mn--dkgrn p{color: $zetkin-dkgrn;}
+   &.mn--ppl p{color: $zetkin-ppl;}
+
+   &.em--blk em{color: $zetkin-blk;}
+   &.em--wht em{color: $zetkin-wht;}
+   &.em--red em{color: $zetkin-red;}
+   &.em--ltgrn em{color: $zetkin-ltgrn;}
+   &.em--dkgrn em{color: $zetkin-dkgrn;}
+   &.em--ppl em{color: $zetkin-ppl;}
+	
+   
 }

@@ -1,3 +1,5 @@
+/* This is the editor style sheet for the zetkin theme, 
+It imports the same styles as the theme and adds overrides specifik to the editor */
 /*!
 Theme Name: Zetkin
 Theme URI: http://underscores.me/
@@ -528,7 +530,7 @@ big {
 
 /* Elements
 --------------------------------------------- */
-body {
+html, body {
   background: #fff;
   max-width: 100vw;
   overflow-x: hidden;
@@ -1009,4 +1011,4 @@ textarea {
   margin-right: auto;
   margin-bottom: 1.5em;
 }
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=editor-style.css.map */
