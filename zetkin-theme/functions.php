@@ -176,3 +176,27 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/** 
+ * Added Zetkin category for Gutenberg Patterns 
+ */
+add_action( 'init', 'zetkin_register_pattern_categories' );
+
+function zetkin_register_pattern_categories() {
+	register_block_pattern_category( 'zetkin/custom', array( 
+		'label'       => __( 'Zetkin', 'zetkin' ),
+		'description' => __( 'Custom patterns for Zetkin.', 'zetkin' )
+	) );
+}
+
+
+function zetkin_enqueue_block_editor_assets() {
+   wp_enqueue_script(
+       'zetkin-block', // Handle for the script.
+       get_theme_file_uri('/blocks/blocks.js'), // Path to the JavaScript file that registers the block.
+       array('wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n'), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
+       filemtime(get_theme_file_path('/blocks/blocks.js')) // Version: file modification time for cache busting.
+   );
+}
+
+add_action('enqueue_block_editor_assets', 'zetkin_enqueue_block_editor_assets');
+

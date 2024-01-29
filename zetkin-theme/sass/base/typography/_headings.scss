@@ -5,4 +5,9 @@ h4,
 h5,
 h6 {
 	clear: both;
+   em{
+      font-family: $font__sec;
+      font-style: normal;
+      font-weight: 400;
+   }
 }
