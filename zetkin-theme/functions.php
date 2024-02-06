@@ -176,6 +176,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+
+
+
 /** 
  * Encue all .js file in /js/ 
  */
@@ -193,13 +197,32 @@ function zetkin_enqueue_folder_scripts() {
 }
 add_action('wp_enqueue_scripts', 'zetkin_enqueue_folder_scripts');
 
+/**
+ * Encue fontloading css
+ */
+function zetkin_enqueue_styles() {
+   
+   
+   // Here's how you enqueue your custom stylesheet:
+   // The handle 'mytheme-custom-style' is a name you give to your stylesheet, which should be unique.
+   // The second parameter is the path to your stylesheet.
+   // You can use get_template_directory_uri() for a parent theme, or get_stylesheet_directory_uri() for a child theme.
+   wp_enqueue_style( 'zetkin-load-fonts', get_template_directory_uri() . '/load-fonts.css', array(), '1.0.0', 'all' );
+   // '1.0.0' is the version number, and 'all' specifies that this stylesheet applies to all media types.
+}
+add_action( 'wp_enqueue_scripts', 'zetkin_enqueue_styles' );
+
+
+
+
+
 /** 
  * Add editor stylesheet 
  */
 function zetkin_setup_theme_supported_features() {
    add_theme_support( 'editor-styles' ); // Enable editor styles
    add_theme_support( 'align-wide' ); // Enable wide alignment options for blocks
-   add_editor_style( 'editor-style.css' ); // Add custom editor style
+   add_editor_style( '/editor-style.css' ); // Add custom editor style
 }
 add_action( 'after_setup_theme', 'zetkin_setup_theme_supported_features' );
 
@@ -246,9 +269,17 @@ function zetkin_enqueue_block_editor_assets() {
        array('wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n'), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
        filemtime(get_theme_file_path('/blocks/blocks.js')) // Version: file modification time for cache busting.
    );
+
+   wp_enqueue_script(
+      'zetkin-flex-header', // Handle for the script.
+      get_theme_file_uri('/js/flex-header.js'), // Path to the JavaScript file that registers the block.
+      array('wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n'), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
+      filemtime(get_theme_file_path('/js/flex-header.js')) 
+  );
 }
 
 add_action('enqueue_block_editor_assets', 'zetkin_enqueue_block_editor_assets');
+
 
 
 

@@ -4,9 +4,10 @@ const { InnerBlocks, InspectorControls, ColorPalette, MediaUpload } =
 const { PanelBody, Button, SelectControl } = wp.components;
 const { __ } = wp.i18n;
 
-registerBlockType("zetkin/custom-hero03", {
-	title: "Zetkin Custom Hero 03",
+registerBlockType("zetkin/custom-section", {
+	title: "Zetkin Custom Section",
 	category: "zetkin",
+   icon: "align-full-width",
 	attributes: {
 		backgroundColor: {
 			type: "string",
@@ -118,7 +119,7 @@ registerBlockType("zetkin/custom-hero03", {
 					</PanelBody>
 				</InspectorControls>
 				<div
-					className="wp-block-cover zetkin-pattern--hero03"
+					className="wp-block-cover zetkin_customSection"
 					style={{
 						backgroundColor: backgroundColor,
 						backgroundImage: backgroundImage
@@ -130,11 +131,11 @@ registerBlockType("zetkin/custom-hero03", {
 					}}
 				>
 					<InnerBlocks
-						allowedBlocks={[
+						/* allowedBlocks={[
 							"core/heading",
 							"core/paragraph",
-							"zetkin/flex-header",
-						]}
+							"zetkin/flex-heading",
+						]} */
 						template={[
 							["core/heading", { placeholder: "Enter heading..." }],
 							["core/paragraph", { placeholder: "Enter text..." }],
@@ -157,7 +158,7 @@ registerBlockType("zetkin/custom-hero03", {
 
 		return (
 			<div
-				className="wp-block-cover zetkin-pattern--hero"
+				className="wp-block-cover zetkin_customSection"
 				style={{
 					backgroundColor: backgroundColor,
 					backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
@@ -172,9 +173,9 @@ registerBlockType("zetkin/custom-hero03", {
 	},
 });
 
-registerBlockType("zetkin/flex-header", {
+registerBlockType("zetkin/flex-heading", {
 	icon: "heading",
-	title: "Zetkin Flex Header",
+	title: "Zetkin Flex Heading",
 	category: "zetkin",
 	attributes: {
 		mainFlexHeadColor: {

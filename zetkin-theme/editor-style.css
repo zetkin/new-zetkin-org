@@ -50,7 +50,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	- Alignments
 
 --------------------------------------------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap'); */
 /*--------------------------------------------------------------
 # Generic
 --------------------------------------------------------------*/
@@ -438,6 +439,7 @@ h6 em,
   margin: 0;
   font-weight: 700;
   line-height: 0.9em;
+  font-size: 3rem;
 }
 .zetkin_flexHeader.mn--blk p {
   color: #111111;
@@ -1011,4 +1013,21 @@ textarea {
   margin-right: auto;
   margin-bottom: 1.5em;
 }
+
+/* Gutenberg custom blocks and patterns
+*/
+.zetkin_customSection {
+  padding: 5vw 0 5vw;
+  min-height: 66vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+          flex-direction: column;
+} /*Overrides below*/
 /*# sourceMappingURL=editor-style.css.map */
