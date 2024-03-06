@@ -1,13 +1,13 @@
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, MediaUpload } =
 	wp.blockEditor;
-const { PanelBody, Button, SelectControl } = wp.components;
+const { PanelBody, Button, SelectControl, TextControl } = wp.components;
 const { __ } = wp.i18n;
 
 registerBlockType("zetkin/custom-section", {
 	title: "Zetkin Custom Section",
 	category: "zetkin",
-   icon: "align-full-width",
+	icon: "align-full-width",
 	attributes: {
 		backgroundColor: {
 			type: "string",
@@ -75,7 +75,7 @@ registerBlockType("zetkin/custom-section", {
 							allowedTypes={["image"]}
 							value={backgroundImage}
 							render={({ open }) => (
-								<Button onClick={open} isDefault isLarge>
+								<Button onClick={open} secondary="true" islarge="true">
 									{backgroundImage
 										? __("Change Image", "text-domain")
 										: __("Select Image", "text-domain")}
@@ -214,7 +214,7 @@ registerBlockType("zetkin/flex-heading", {
 								{ label: "White", value: "mn--wht" },
 								{ label: "Red", value: "mn--red" },
 								{ label: "Light Green", value: "mn--ltgrn" },
-                        { label: "Dark Green", value: "mn--dkgrn" },
+								{ label: "Dark Green", value: "mn--dkgrn" },
 								{ label: "Purple", value: "mn--ppl" },
 								// More options...
 							]}
@@ -228,7 +228,7 @@ registerBlockType("zetkin/flex-heading", {
 								{ label: "White", value: "em--wht" },
 								{ label: "Red", value: "em--red" },
 								{ label: "Light Green", value: "em--ltgrn" },
-                        { label: "Dark Green", value: "em--dkgrn" },
+								{ label: "Dark Green", value: "em--dkgrn" },
 								{ label: "Purple", value: "em--ppl" },
 								// More options...
 							]}
@@ -247,12 +247,272 @@ registerBlockType("zetkin/flex-heading", {
 		);
 	},
 	save: ({ attributes }) => {
-      const { mainFlexHeadColor, obliqueFlexHeadColor } = attributes;
-  
-      return (
-          <div className={`zetkin_flexHeader ${mainFlexHeadColor} ${obliqueFlexHeadColor}`}>
-              <InnerBlocks.Content />
-          </div>
-      );
-  },
+		const { mainFlexHeadColor, obliqueFlexHeadColor } = attributes;
+
+		return (
+			<div
+				className={`zetkin_flexHeader ${mainFlexHeadColor} ${obliqueFlexHeadColor}`}
+			>
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+});
+
+/* Employee list*/
+registerBlockType("zetkin/employee-list", {
+	icon: "groups",
+	title: "Zetkin Employee List",
+	category: "layout",
+	edit: (props) => {
+		const {
+			attributes: { listItemWidth },
+			setAttributes,
+		} = props;
+		return (
+			<>
+				<InspectorControls>
+					<PanelBody title="Employee List Settings" initialOpen={true}>
+						{/* Additional settings can go here */}
+						<SelectControl
+							label="Element Width"
+							value={listItemWidth}
+							options={[
+								{ label: "black", value: "mn--blk" },
+								{ label: "White", value: "mn--wht" },
+								{ label: "Red", value: "mn--red" },
+								{ label: "Light Green", value: "mn--ltgrn" },
+								{ label: "Dark Green", value: "mn--dkgrn" },
+								{ label: "Purple", value: "mn--ppl" },
+								// More options...
+							]}
+						/>
+					</PanelBody>
+				</InspectorControls>
+				<div className="employee-list">
+					<InnerBlocks allowedBlocks={["zetkin/employee"]} />
+				</div>
+			</>
+		);
+	},
+	save: ({ attributes }) => {
+		const { listItemWidth } = attributes;
+
+		return (
+			<div className={`zetkin_flexHeader ${listItemWidth} `}>
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+});
+
+/* Employee */
+
+/* imageSizes is a prop that is passed to the EditComponent */
+const { withSelect, withDispatch } = wp.data;
+
+const EditComponent = ({ attributes, setAttributes, imageSizes, media }) => {
+	const imageSizeOptions = imageSizes.map((size) => ({
+		label: size.name,
+		value: size.slug,
+	}));
+
+	const onImageSizeChange = async (imageSize) => {
+		setAttributes({ imageSize });
+
+		if (attributes.imageId) {
+			const image = await media(attributes.imageId);
+			if (image && image.media_details.sizes[imageSize]) {
+				setAttributes({
+					imageUrl: image.media_details.sizes[imageSize].source_url,
+				});
+			}
+		}
+	};
+
+	return (
+		<>
+			<InspectorControls>
+				<PanelBody title="Employee Settings" initialOpen={true}>
+					<SelectControl
+						label="Image Size"
+						value={attributes.imageSize}
+						options={imageSizeOptions}
+						onChange={onImageSizeChange}
+					/>
+				</PanelBody>
+			</InspectorControls>
+			<div className="employee-details">
+				<MediaUpload
+					onSelect={(media) => {
+						setAttributes({
+							imageId: media.id,
+							imageUrl: media.sizes[attributes.imageSize].url,
+						});
+					}}
+					type="image"
+					value={attributes.imageId}
+					render={({ open }) => (
+						<Button onClick={open}>
+							{!attributes.imageUrl ? "Upload Image" : "Edit Image"}
+						</Button>
+					)}
+				/>
+				{attributes.imageUrl && (
+					<img src={attributes.imageUrl} alt={attributes.name} />
+				)}
+				<TextControl
+					label="Name"
+					value={attributes.name}
+					onChange={(name) => setAttributes({ name })}
+				/>
+				<TextControl
+					label="Title"
+					value={attributes.title}
+					onChange={(title) => setAttributes({ title })}
+				/>
+			</div>
+		</>
+	);
+};
+
+const EditWithSelect = withSelect((select) => {
+	const { getSettings } = select("core/block-editor");
+	const { getMedia } = select("core");
+	const { imageSizes } = getSettings();
+
+	return {
+		imageSizes,
+		media: getMedia,
+	};
+})(EditComponent);
+
+registerBlockType("zetkin/employee", {
+	icon: "id-alt",
+	title: "Zetkin Employee",
+	category: "layout",
+	parent: ["zetkin/employee-list"],
+	attributes: {
+		name: {
+			type: "string",
+			default: "John Doe",
+		},
+		title: {
+			type: "string",
+			default: "Superhero",
+		},
+		imageUrl: {
+			type: "string",
+			default: "",
+		},
+		imageId: {
+			type: "number",
+		},
+		imageSize: {
+			type: "string",
+			default: "full",
+		},
+	},
+	edit: EditWithSelect,
+	save: ({ attributes }) => {
+		return (
+			<div className="employee-details">
+				{attributes.imageUrl && (
+					<img src={attributes.imageUrl} alt={attributes.name} />
+				)}
+				<p className="employee-name">{attributes.name}</p>
+				<p className="employee-title">{attributes.title}</p>
+			</div>
+		);
+	},
+});
+
+const { useSelect, ServerSideRender } = wp.data;
+
+registerBlockType("zetkin/post-list", {
+	icon: "list-view",
+	title: "Zetkin Post List",
+	category: "layout",
+	attributes: {
+		postType: {
+			type: "string",
+			default: "post",
+		},
+		category: {
+			type: "number",
+			default: 1,
+		},
+		numberOfPosts: {
+			type: "number",
+			default: 5,
+		},
+	},
+	edit: (props) => {
+		const {
+			attributes: { postType, category, numberOfPosts },
+			setAttributes,
+		} = props;
+
+		const onChangePostType = (newPostType) => {
+			setAttributes({ postType: newPostType });
+		};
+
+		const onChangeCategory = (newCategory) => {
+			setAttributes({ category: newCategory });
+		};
+
+		const onChangeNumberOfPosts = (newNumberOfPosts) => {
+			setAttributes({ numberOfPosts: newNumberOfPosts });
+		};
+
+		const { categories } = useSelect((select) => {
+			return {
+				categories:
+					select("core").getEntityRecords("taxonomy", "category") || [],
+			};
+		}, []);
+
+		const categoryOptions = categories.map((cat) => ({
+			label: cat.name,
+			value: cat.id,
+		}));
+
+		return (
+			<>
+				<InspectorControls>
+					<PanelBody title="Post List Settings" initialOpen={true}>
+						<SelectControl
+							label="Post Type"
+							value={postType}
+							options={[
+								{ label: "Post", value: "post" },
+								{ label: "Page", value: "page" },
+								{ label: "Product", value: "product" },
+								// Add other post types as needed
+							]}
+							onChange={onChangePostType}
+						/>
+						<SelectControl
+							label="Category"
+							value={category}
+							options={categoryOptions}
+							onChange={onChangeCategory}
+						/>
+						<TextControl
+							label="Number of Posts"
+							value={numberOfPosts}
+							onChange={onChangeNumberOfPosts}
+						/>
+					</PanelBody>
+				</InspectorControls>
+				<ServerSideRender
+					block="zetkin/post-list"
+					attributes={props.attributes}
+				/>
+			</>
+		);
+	},
+	save: () => {
+		return null; // The save function needs to return null because the block is rendered with PHP
+	},
 });

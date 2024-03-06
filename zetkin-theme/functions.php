@@ -281,5 +281,37 @@ function zetkin_enqueue_block_editor_assets() {
 add_action('enqueue_block_editor_assets', 'zetkin_enqueue_block_editor_assets');
 
 
+/** 
+ * Added Zetkin blocks for post list 
+ */
+function zetkin_render_post_list_block($attributes) {
+    $postType = $attributes['postType'];
+    $category = $attributes['category'];
+    $numberOfPosts = $attributes['numberOfPosts'];
+
+    $query = new WP_Query(array(
+        'post_type' => $postType,
+        'cat' => $category,
+        'posts_per_page' => $numberOfPosts,
+    ));
+
+    $output = '<ul>';
+
+    while ($query->have_posts()) {
+        $query->the_post();
+        $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+    }
+
+    $output .= '</ul>';
+
+    wp_reset_postdata();
+
+    return $output;
+}
+
+register_block_type('zetkin/post-list', array(
+    'render_callback' => 'zetkin_render_post_list_block',
+));
+
 
 
