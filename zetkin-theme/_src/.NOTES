@@ -1,0 +1,145 @@
+function zetkin_render_post_list_block($attributes) {
+   $postType = isset($attributes['postType']) ? $attributes['postType'] : 'post';
+   $category = isset($attributes['category']) ? $attributes['category'] : 1;
+   $numberOfPosts = isset($attributes['numberOfPosts']) ? $attributes['numberOfPosts'] : 5;
+
+   $args = array(
+       'post_type' => $postType,
+       'posts_per_page' => $numberOfPosts,
+   );
+
+   if ($postType === 'post') {
+       $args['cat'] = $category;
+   } else {
+       // Get the taxonomies associated with the post type
+       $taxonomies = get_object_taxonomies($postType);
+
+       // Use the first taxonomy for the tax_query
+       // If your post type uses a specific taxonomy for categories, replace $taxonomies[0] with the slug of that taxonomy
+       $args['tax_query'] = array(
+           array(
+               'taxonomy' => $taxonomies[0],
+               'terms' => $category,
+           ),
+       );
+   }
+
+   $query = new WP_Query($args);
+
+   $output = '<ul>';
+
+   while ($query->have_posts()) {
+       $query->the_post();
+       $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+   }
+
+   $output .= '</ul>';
+
+   wp_reset_postdata();
+
+   return $output;
+}
+
+
+/*------------------------------------------------------------------*/
+blocks.js;
+
+
+const { useSelect } = wp.data;
+
+//const { ServerSideRender } = wp.components;
+import ServerSideRender from '@wordpress/server-side-render';
+registerBlockType("zetkin/post-list", {
+	icon: "list-view",
+	title: "Zetkin Post List",
+	category: "layout",
+	attributes: {
+		postType: {
+			type: "string",
+			default: "post",
+		},
+		category: {
+			type: "number",
+			default: 1,
+		},
+		numberOfPosts: {
+			type: "number",
+			default: 5,
+		},
+	},
+   edit: (props) => {
+      const {
+          attributes: { postType, category, numberOfPosts },
+          setAttributes,
+      } = props;
+
+      const onChangePostType = (newPostType) => {
+          setAttributes({ postType: newPostType, category: undefined });
+      };
+
+      const onChangeCategory = (newCategory) => {
+          setAttributes({ category: newCategory });
+      };
+
+      const onChangeNumberOfPosts = (newNumberOfPosts) => {
+          setAttributes({ numberOfPosts: newNumberOfPosts });
+      };
+
+      const { categories, postTypes } = useSelect((select) => {
+          const { getEntityRecords, getPostTypes } = select("core");
+          return {
+              categories: getEntityRecords("taxonomy", "category", { postType }) || [],
+              postTypes: getPostTypes() || [],
+          };
+      }, [postType]);
+
+      const categoryOptions = categories.map((cat) => ({
+          label: cat.name,
+          value: cat.id,
+      }));
+
+      const postTypeOptions = postTypes
+          .filter((type) => type.viewable)
+          .map((type) => ({
+              label: type.labels.singular_name,
+              value: type.slug,
+          }));
+
+      const selectedPostType = postTypes.find((type) => type.slug === postType);
+      const isCategoryDisabled = selectedPostType && !selectedPostType.taxonomies.includes('category');
+
+      return (
+          <>
+              <InspectorControls>
+                  <PanelBody title="Post List Settings" initialOpen={true}>
+                      <SelectControl
+                          label="Post Type"
+                          value={postType}
+                          options={postTypeOptions}
+                          onChange={onChangePostType}
+                      />
+                      <SelectControl
+                          label="Category"
+                          value={category}
+                          options={categoryOptions}
+                          onChange={onChangeCategory}
+                          disabled={isCategoryDisabled}
+                      />
+                      <TextControl
+                          label="Number of Posts"
+                          value={numberOfPosts}
+                          onChange={onChangeNumberOfPosts}
+                      />
+                  </PanelBody>
+              </InspectorControls>
+              {/* <ServerSideRender
+                  block="zetkin/post-list"
+                  attributes={props.attributes}
+              /> */}
+          </>
+      );
+  },
+  save: () => {
+      return null; // The save function needs to return null because the block is rendered with PHP
+  },
+});

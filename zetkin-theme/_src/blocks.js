@@ -1,8 +1,23 @@
-const { registerBlockType } = wp.blocks;
+//const { registerBlockType } = wp.blocks;
+//const { InnerBlocks, InspectorControls, ColorPalette, MediaUpload } = wp.blockEditor;
+//const { PanelBody, Button, TextControl } = wp.components;
+//const { __ } = wp.i18n;
+
+//const { SelectControl } = wp.components;
+//const ServerSideRender = wp.serverSideRender;
+
+//const { ServerSideRender } = wp.components;
+
+//import { SelectControl } from '@wordpress/components';
+//const { useSelect } = wp.data;
+
+const { registerBlockType, useBlockProps } = wp.blocks;
 const { InnerBlocks, InspectorControls, ColorPalette, MediaUpload } =
 	wp.blockEditor;
-const { PanelBody, Button, SelectControl, TextControl } = wp.components;
+const { PanelBody, Button, TextControl, SelectControl } = wp.components;
 const { __ } = wp.i18n;
+const ServerSideRender = wp.serverSideRender;
+const { useSelect } = wp.data;
 
 registerBlockType("zetkin/custom-section", {
 	title: "Zetkin Custom Section",
@@ -427,92 +442,112 @@ registerBlockType("zetkin/employee", {
 	},
 });
 
-const { useSelect, ServerSideRender } = wp.data;
+//const { registerBlockType } = wp.blocks;
 
 registerBlockType("zetkin/post-list", {
-	icon: "list-view",
 	title: "Zetkin Post List",
-	category: "layout",
+	icon: "admin-post",
+	category: "common",
 	attributes: {
 		postType: {
 			type: "string",
 			default: "post",
 		},
-		category: {
-			type: "number",
-			default: 1,
+		taxonomy: {
+			type: "string",
+			default: "category",
 		},
-		numberOfPosts: {
-			type: "number",
-			default: 5,
+		term: {
+			type: "string",
+			default: "",
 		},
 	},
 	edit: (props) => {
-		const {
-			attributes: { postType, category, numberOfPosts },
-			setAttributes,
-		} = props;
+		const { attributes, setAttributes } = props;
+		const { postType, taxonomy, term } = attributes;
+
+		const postTypes = useSelect((select) => {
+			const allPostTypes = select("core").getPostTypes();
+			if (!allPostTypes) {
+				return [];
+			}
+			return allPostTypes.filter((type) => type.viewable);
+		}, []);
+		const taxonomies = useSelect((select) => {
+         if (!postType || postType === 'attachment') {
+             return [];
+         }
+         return select('core').getTaxonomies({ type: postType });
+     }, [postType]);
+		const terms = useSelect(
+			(select) => {
+				if (!taxonomy) {
+					return [];
+				}
+				return select("core").getEntityRecords("taxonomy", taxonomy);
+			},
+			[taxonomy]
+		);
 
 		const onChangePostType = (newPostType) => {
 			setAttributes({ postType: newPostType });
 		};
 
-		const onChangeCategory = (newCategory) => {
-			setAttributes({ category: newCategory });
+		const onChangeTaxonomy = (newTaxonomy) => {
+			setAttributes({ taxonomy: newTaxonomy });
 		};
 
-		const onChangeNumberOfPosts = (newNumberOfPosts) => {
-			setAttributes({ numberOfPosts: newNumberOfPosts });
+		const onChangeTerm = (newTerm) => {
+			setAttributes({ term: newTerm });
 		};
-
-		const { categories } = useSelect((select) => {
-			return {
-				categories:
-					select("core").getEntityRecords("taxonomy", "category") || [],
-			};
-		}, []);
-
-		const categoryOptions = categories.map((cat) => ({
-			label: cat.name,
-			value: cat.id,
-		}));
 
 		return (
-			<>
+			<div>
 				<InspectorControls>
-					<PanelBody title="Post List Settings" initialOpen={true}>
-						<SelectControl
-							label="Post Type"
-							value={postType}
-							options={[
-								{ label: "Post", value: "post" },
-								{ label: "Page", value: "page" },
-								{ label: "Product", value: "product" },
-								// Add other post types as needed
-							]}
-							onChange={onChangePostType}
-						/>
-						<SelectControl
-							label="Category"
-							value={category}
-							options={categoryOptions}
-							onChange={onChangeCategory}
-						/>
-						<TextControl
-							label="Number of Posts"
-							value={numberOfPosts}
-							onChange={onChangeNumberOfPosts}
-						/>
+					<PanelBody title="Post Settings">
+						{postTypes && (
+							<SelectControl
+								label="Post Type"
+								value={postType}
+								options={postTypes.map((type) => ({
+									label: type.name,
+									value: type.slug,
+								}))}
+								onChange={onChangePostType}
+							/>
+						)}
+						{taxonomies && (
+							<SelectControl
+								label="Taxonomy"
+								value={taxonomy}
+								options={taxonomies.map((tax) => ({
+									label: tax.name,
+									value: tax.slug,
+								}))}
+								onChange={onChangeTaxonomy}
+							/>
+						)}
+						{terms && (
+							<SelectControl
+								label="Term"
+								value={term}
+								options={terms.map((term) => ({
+									label: term.name,
+									value: term.id,
+								}))}
+								onChange={onChangeTerm}
+							/>
+						)}
 					</PanelBody>
 				</InspectorControls>
-				<ServerSideRender
-					block="zetkin/post-list"
-					attributes={props.attributes}
-				/>
-			</>
+				{/* <ServerSideRender
+            block="zetkin/post-list"
+            attributes={props.attributes}
+         /> */}
+			</div>
 		);
 	},
 	save: () => {
-		return null; // The save function needs to return null because the block is rendered with PHP
+		return null; // Server-side rendering
 	},
 });
