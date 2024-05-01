@@ -19,14 +19,14 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function slug_setup() {
+function ztk_setup() {
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
 		* If you're building a theme based on Zetkin, use a find and replace
-		* to change 'slug' to the name of your theme in all the template files.
+		* to change 'ztk' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'slug', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'ztk', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -49,7 +49,7 @@ function slug_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'slug' ),
+			'menu-1' => esc_html__( 'Primary', 'ztk' ),
 		)
 	);
 
@@ -74,7 +74,7 @@ function slug_setup() {
 	add_theme_support(
 		'custom-background',
 		apply_filters(
-			'slug_custom_background_args',
+			'ztk_custom_background_args',
 			array(
 				'default-color' => 'ffffff',
 				'default-image' => '',
@@ -100,7 +100,7 @@ function slug_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'slug_setup' );
+add_action( 'after_setup_theme', 'ztk_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -109,22 +109,22 @@ add_action( 'after_setup_theme', 'slug_setup' );
  *
  * @global int $content_width
  */
-function slug_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'slug_content_width', 640 );
+function ztk_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'ztk_content_width', 640 );
 }
-add_action( 'after_setup_theme', 'slug_content_width', 0 );
+add_action( 'after_setup_theme', 'ztk_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function slug_widgets_init() {
+function ztk_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'slug' ),
+			'name'          => esc_html__( 'Sidebar', 'ztk' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'slug' ),
+			'description'   => esc_html__( 'Add widgets here.', 'ztk' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -132,22 +132,22 @@ function slug_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'slug_widgets_init' );
+add_action( 'widgets_init', 'ztk_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
-function slug_scripts() {
-	wp_enqueue_style( 'slug-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'slug-style', 'rtl', 'replace' );
+function ztk_scripts() {
+	wp_enqueue_style( 'ztk-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_style_add_data( 'ztk-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'slug-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'ztk-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'slug_scripts' );
+add_action( 'wp_enqueue_scripts', 'ztk_scripts' );
 
 /**
  * Implement the Custom Header feature.

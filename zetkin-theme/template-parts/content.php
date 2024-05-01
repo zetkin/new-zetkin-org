@@ -22,14 +22,14 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				slug_posted_on();
-				slug_posted_by();
+				ztk_posted_on();
+				ztk_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php slug_post_thumbnail(); ?>
+	<?php ztk_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -37,7 +37,7 @@
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'slug' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'ztk' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -50,7 +50,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'slug' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ztk' ),
 				'after'  => '</div>',
 			)
 		);
@@ -58,6 +58,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php slug_entry_footer(); ?>
+		<?php ztk_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

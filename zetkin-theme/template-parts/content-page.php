@@ -14,7 +14,7 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php slug_post_thumbnail(); ?>
+	<?php ztk_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -22,7 +22,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'slug' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ztk' ),
 				'after'  => '</div>',
 			)
 		);
@@ -36,7 +36,7 @@
 				sprintf(
 					wp_kses(
 						/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Edit <span class="screen-reader-text">%s</span>', 'slug' ),
+						__( 'Edit <span class="screen-reader-text">%s</span>', 'ztk' ),
 						array(
 							'span' => array(
 								'class' => array(),
