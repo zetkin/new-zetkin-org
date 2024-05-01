@@ -1,5 +1,9 @@
 {
-  "core": null,
-  "plugins": [],
-  "themes": ["./zetkin-theme"]
+  "phpVersion": "8.1",
+  "themes": [
+      "."
+  ],
+  "config": {
+      "WP_DEBUG": true
+  }
 }
