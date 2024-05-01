@@ -1,3 +1,4 @@
 /node_modules
 /vendor
+/zetkin-theme/build
 *.code-workspace

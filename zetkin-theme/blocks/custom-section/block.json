@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "zetkin/custom-section",
+	"version": "0.1.0",
+	"title": "Zetkin Custom Section",
+	"category": "zetkin",
+	"icon": "align-full-width",
+	"description": "",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "ztk",
+	"attributes": {
+		"backgroundColor": {
+			"type": "string",
+			"default": "#888888"
+		},
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundPosition": {
+			"type": "string",
+			"default": "center center"
+		},
+		"backgroundSize": {
+			"type": "string",
+			"default": "cover"
+		},
+		"backgroundRepeat": {
+			"type": "string",
+			"default": "no-repeat"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

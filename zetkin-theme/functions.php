@@ -264,14 +264,6 @@ add_filter( 'block_categories_all', 'register_zetkin_block_category', 10, 2 );
  * Added Zetkin blocks for Gutenberg Patterns
  */
 function zetkin_enqueue_block_editor_assets() {
-
-	wp_enqueue_script(
-		'zetkin-block', // Handle for the script.
-		get_theme_file_uri( '/blocks/blocks.js' ), // Path to the JavaScript file that registers the block.
-		array( 'wp-dom-ready', 'wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n' ), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
-		filemtime( get_theme_file_path( '/blocks/blocks.js' ) ) // Version: file modification time for cache busting.
-	);
-
 	wp_enqueue_script(
 		'zetkin-flex-header', // Handle for the script.
 		get_theme_file_uri( '/js/flex-header.js' ), // Path to the JavaScript file that registers the block.
@@ -287,31 +279,6 @@ function my_enqueue_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
-
-
-// function zetkin_register_post_list() {
-register_block_type(
-	'zetkin/post-list',
-	array(
-		'attributes'      => array(
-			'postType' => array(
-				'type'    => 'string',
-				'default' => 'post',
-			),
-			'taxonomy' => array(
-				'type'    => 'string',
-				'default' => 'category',
-			),
-			'term'     => array(
-				'type'    => 'string',
-				'default' => '',
-			),
-		),
-		'render_callback' => 'zetkin_render_post_list',
-	)
-);
-// }
-// add_action('init', 'zetkin_register_post_list');
 
 function zetkin_render_post_list( $attributes ) {
 	$query_args = array(
@@ -344,3 +311,5 @@ function zetkin_render_post_list( $attributes ) {
 
 	return $output;
 }
+
+require_once __DIR__ . '/blocks/index.php';
