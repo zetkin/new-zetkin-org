@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<ruleset name="themes">
+	<description>Apply WordPress Coding Standards to all files</description>
+
+	<!-- Arguments -->
+
+	<!-- Only scan PHP files. -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Whenever possible, cache the scan results and re-use those for unchanged files on the next scan. -->
+	<arg name="cache"/>
+
+	<!-- Set the memory limit to 256M. -->
+	<ini name="memory_limit" value="256M"/>
+
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="./"/>
+
+	<!-- Check up to 20 files simultaneously. -->
+	<arg name="parallel" value="20"/>
+
+    <!--
+        p flag: Show progress of the run.
+        s flag: Show sniff codes in all reports.
+        v flag: Print verbose output.
+    -->
+    <arg value="psv" />
+
+    <!-- Files. -->
+
+	<file>.</file>
+
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/zetkin-theme/build/*</exclude-pattern>
+
+    <!-- Config. -->
+
+    <config name="minimum_supported_wp_version" value="6.5" />
+    <config name="testVersion" value="8.1" />
+    <config name="text_domain" value="ztk" />
+    <config name="php_version" value="80128" />>
+
+	<!-- Rules -->
+
+	<rule ref="PHPCompatibilityWP" />	
+
+	<rule ref="WordPress-Core">
+		<exclude ref="Squiz.Commenting.FileComment.MissingPackageTag"/>
+	</rule>	
+
+	<rule ref="WordPress.CodeAnalysis.EmptyStatement"/>
+
+	<rule ref="VariableAnalysis" />
+</ruleset>

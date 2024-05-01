@@ -179,35 +179,34 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 
 
-/** 
- * Encue all .js file in /js/ 
+/**
+ * Encue all .js file in /js/
  */
 function zetkin_enqueue_folder_scripts() {
-   $script_directory = get_template_directory() . '/js/';
-   $script_url = get_template_directory_uri() . '/js/';
-   $script_files = glob($script_directory . '*.js');
+	$script_directory = get_template_directory() . '/js/';
+	$script_url       = get_template_directory_uri() . '/js/';
+	$script_files     = glob( $script_directory . '*.js' );
 
-   foreach ($script_files as $file) {
-       $file_url = $script_url . basename($file);
-       $file_slug = 'script-' . basename($file, '.js');
+	foreach ( $script_files as $file ) {
+		$file_url  = $script_url . basename( $file );
+		$file_slug = 'script-' . basename( $file, '.js' );
 
-       wp_enqueue_script($file_slug, $file_url, array(), false, false);
-   }
+		wp_enqueue_script( $file_slug, $file_url, array(), false, false );
+	}
 }
-add_action('wp_enqueue_scripts', 'zetkin_enqueue_folder_scripts');
+add_action( 'wp_enqueue_scripts', 'zetkin_enqueue_folder_scripts' );
 
 /**
  * Encue fontloading css
  */
 function zetkin_enqueue_styles() {
-   
-   
-   // Here's how you enqueue your custom stylesheet:
-   // The handle 'mytheme-custom-style' is a name you give to your stylesheet, which should be unique.
-   // The second parameter is the path to your stylesheet.
-   // You can use get_template_directory_uri() for a parent theme, or get_stylesheet_directory_uri() for a child theme.
-   wp_enqueue_style( 'zetkin-load-fonts', get_template_directory_uri() . '/load-fonts.css', array(), '1.0.0', 'all' );
-   // '1.0.0' is the version number, and 'all' specifies that this stylesheet applies to all media types.
+
+	// Here's how you enqueue your custom stylesheet:
+	// The handle 'mytheme-custom-style' is a name you give to your stylesheet, which should be unique.
+	// The second parameter is the path to your stylesheet.
+	// You can use get_template_directory_uri() for a parent theme, or get_stylesheet_directory_uri() for a child theme.
+	wp_enqueue_style( 'zetkin-load-fonts', get_template_directory_uri() . '/load-fonts.css', array(), '1.0.0', 'all' );
+	// '1.0.0' is the version number, and 'all' specifies that this stylesheet applies to all media types.
 }
 add_action( 'wp_enqueue_scripts', 'zetkin_enqueue_styles' );
 
@@ -215,132 +214,133 @@ add_action( 'wp_enqueue_scripts', 'zetkin_enqueue_styles' );
 
 
 
-/** 
- * Add editor stylesheet 
+/**
+ * Add editor stylesheet
  */
 function zetkin_setup_theme_supported_features() {
-   add_theme_support( 'editor-styles' ); // Enable editor styles
-   add_theme_support( 'align-wide' ); // Enable wide alignment options for blocks
-   add_editor_style( '/editor-style.css' ); // Add custom editor style
+	add_theme_support( 'editor-styles' ); // Enable editor styles
+	add_theme_support( 'align-wide' ); // Enable wide alignment options for blocks
+	add_editor_style( '/editor-style.css' ); // Add custom editor style
 }
 add_action( 'after_setup_theme', 'zetkin_setup_theme_supported_features' );
 
 
-/** 
- * Added Zetkin category for Gutenberg Patterns 
+/**
+ * Added Zetkin category for Gutenberg Patterns
  */
 add_action( 'init', 'zetkin_register_pattern_categories' );
 
 function zetkin_register_pattern_categories() {
-	register_block_pattern_category( 'zetkin/custom', array( 
-		'label'       => __( 'Zetkin', 'zetkin' ),
-		'description' => __( 'Custom patterns for Zetkin.', 'zetkin' )
-	) );
+	register_block_pattern_category(
+		'zetkin/custom',
+		array(
+			'label'       => __( 'ztk', 'ztk' ),
+			'description' => __( 'Custom patterns for Zetkin.', 'ztk' ),
+		)
+	);
 }
 
-/** 
- * Added Zetkin category for Gutenberg Blocks 
+/**
+ * Added Zetkin category for Gutenberg Blocks
  */
 function register_zetkin_block_category( $block_categories, $editor_context ) {
-   if ( ! empty( $editor_context->post ) ) {
-       array_push(
-           $block_categories,
-           array(
-               'slug'  => 'zetkin',
-               'title' => __( 'Zetkin Blocks', 'text-domain' ),
-               'icon'  => 'wordpress', // Optional. Use a Dashicon slug or an SVG.
-           )
-       );
-   }
+	if ( ! empty( $editor_context->post ) ) {
+		array_push(
+			$block_categories,
+			array(
+				'slug'  => 'zetkin',
+				'title' => __( 'Zetkin Blocks', 'text-domain' ),
+				'icon'  => 'wordpress', // Optional. Use a Dashicon slug or an SVG.
+			)
+		);
+	}
 
-   return $block_categories;
+	return $block_categories;
 }
 add_filter( 'block_categories_all', 'register_zetkin_block_category', 10, 2 );
 
 
-/** 
- * Added Zetkin blocks for Gutenberg Patterns 
+/**
+ * Added Zetkin blocks for Gutenberg Patterns
  */
 function zetkin_enqueue_block_editor_assets() {
 
+	wp_enqueue_script(
+		'zetkin-block', // Handle for the script.
+		get_theme_file_uri( '/blocks/blocks.js' ), // Path to the JavaScript file that registers the block.
+		array( 'wp-dom-ready', 'wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n' ), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
+		filemtime( get_theme_file_path( '/blocks/blocks.js' ) ) // Version: file modification time for cache busting.
+	);
 
-   wp_enqueue_script(
-       'zetkin-block', // Handle for the script.
-       get_theme_file_uri('/blocks/blocks.js'), // Path to the JavaScript file that registers the block.
-       array('wp-dom-ready','wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n'), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
-       filemtime(get_theme_file_path('/blocks/blocks.js')) // Version: file modification time for cache busting.
-   );
-
-   wp_enqueue_script(
-      'zetkin-flex-header', // Handle for the script.
-      get_theme_file_uri('/js/flex-header.js'), // Path to the JavaScript file that registers the block.
-      array('wp-dom-ready','wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n'), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
-      filemtime(get_theme_file_path('/js/flex-header.js')) 
-  );
+	wp_enqueue_script(
+		'zetkin-flex-header', // Handle for the script.
+		get_theme_file_uri( '/js/flex-header.js' ), // Path to the JavaScript file that registers the block.
+		array( 'wp-dom-ready', 'wp-blocks', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n' ), // Dependencies, including wp-blocks for block type registration and wp-editor for editor-specific components.
+		filemtime( get_theme_file_path( '/js/flex-header.js' ) )
+	);
 }
 
-add_action('enqueue_block_editor_assets', 'zetkin_enqueue_block_editor_assets');
+add_action( 'enqueue_block_editor_assets', 'zetkin_enqueue_block_editor_assets' );
 
 function my_enqueue_scripts() {
-   wp_enqueue_script('wp-data');
+	wp_enqueue_script( 'wp-data' );
 }
 
-add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
 
 
-//function zetkin_register_post_list() {
-   register_block_type('zetkin/post-list', array(
-      'attributes' => array(
-          'postType' => array(
-              'type' => 'string',
-              'default' => 'post',
-          ),
-          'taxonomy' => array(
-              'type' => 'string',
-              'default' => 'category',
-          ),
-          'term' => array(
-              'type' => 'string',
-              'default' => '',
-          ),
-      ),
-      'render_callback' => 'zetkin_render_post_list',
-  ));
-//}
-//add_action('init', 'zetkin_register_post_list');
+// function zetkin_register_post_list() {
+register_block_type(
+	'zetkin/post-list',
+	array(
+		'attributes'      => array(
+			'postType' => array(
+				'type'    => 'string',
+				'default' => 'post',
+			),
+			'taxonomy' => array(
+				'type'    => 'string',
+				'default' => 'category',
+			),
+			'term'     => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+		),
+		'render_callback' => 'zetkin_render_post_list',
+	)
+);
+// }
+// add_action('init', 'zetkin_register_post_list');
 
-function zetkin_render_post_list($attributes) {
-   $query_args = array(
-      'post_type' => $attributes['postType'],
-      'posts_per_page' => -1, // Get all posts
-   );
+function zetkin_render_post_list( $attributes ) {
+	$query_args = array(
+		'post_type'      => $attributes['postType'],
+		'posts_per_page' => -1, // Get all posts
+	);
 
-   if (!empty($attributes['taxonomy']) && !empty($attributes['term'])) {
-      $query_args['tax_query'] = array(
-         array(
-            'taxonomy' => $attributes['taxonomy'],
-            'field'    => 'term_id',
-            'terms'    => $attributes['term'],
-         ),
-      );
-   }
+	if ( ! empty( $attributes['taxonomy'] ) && ! empty( $attributes['term'] ) ) {
+		$query_args['tax_query'] = array(
+			array(
+				'taxonomy' => $attributes['taxonomy'],
+				'field'    => 'term_id',
+				'terms'    => $attributes['term'],
+			),
+		);
+	}
 
-   $query = new WP_Query($query_args);
+	$query = new WP_Query( $query_args );
 
-   $output = '<ul>';
+	$output = '<ul>';
 
-   while ($query->have_posts()) {
-      $query->the_post();
-      $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
-   }
+	while ( $query->have_posts() ) {
+		$query->the_post();
+		$output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+	}
 
-   $output .= '</ul>';
+	$output .= '</ul>';
 
-   wp_reset_postdata();
+	wp_reset_postdata();
 
-   return $output;
+	return $output;
 }
-
-
-
-?>

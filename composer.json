@@ -1,0 +1,41 @@
+{
+	"name": "zetkin/new-zetkin-org",
+	"description": "New website for Zetkin Foundation",
+	"type": "project",
+    "version": "0.0.1",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+	"author": {
+		"name": "Stefan fisk",
+		"email": "contact@stefanfisk.com"
+	},
+    "config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+        "platform": {
+            "php": "8.1"
+        },
+        "secure-http": false,
+        "sort-packages": true
+	},
+	"require": {
+		"php": ">=8.1"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+		"phpcompatibility/phpcompatibility-wp": "*",
+		"sirbrillig/phpcs-variable-analysis": "^2.11",
+		"squizlabs/php_codesniffer": "^3.5",
+		"wp-coding-standards/wpcs": "^2.2",
+		"wptrt/wpthemereview": "^0.2.1"
+	},
+
+	"scripts": {
+		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
+		"lint": "phpcs --standard=phpcs.xml.dist",
+		"standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+		"standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+	}
+}
