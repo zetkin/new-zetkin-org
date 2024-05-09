@@ -1,0 +1,7 @@
+@use "sass:math";
+
+@function fluid-size($originalSize, $baseWidth) {
+    $relSize: math.div($originalSize, $baseWidth);
+
+    @return calc(var(--ztk--layout--content-width) * $relSize);
+}

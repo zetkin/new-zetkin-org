@@ -26,4 +26,6 @@
 
     --ztk--layout--root-padding: 2rem;
     --ztk--layout--content-max-width: 90rem;
+
+    --ztk--layout--content-width: min(var(--ztk--layout--content-max-width), 100vw - 2 * var(--ztk--layout--root-padding));
 }
