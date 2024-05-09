@@ -1,0 +1,16 @@
+@import "~normalize.css";
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    font-family: var(--ztk--font-family--main);
+}

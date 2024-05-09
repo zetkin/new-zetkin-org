@@ -1,0 +1,42 @@
+.site-header {
+    position: relative;
+    height: 4.5rem;
+    padding: 0.5rem var(--ztk--layout--root-padding);
+    background: var(--ztk--color--red-700);
+    color: var(--ztk--color--white);
+
+    &__inner {
+        max-width: var(--ztk--layout--content-width);
+        margin: 0 auto;
+    }
+
+    &__logo-1 {
+        display: block;
+        height: calc(3.5rem);
+        margin-left: calc(var(--ztk--layout--root-padding) / 2 * -1);
+        fill: currentColor;
+    }
+
+    &__logo-2 {
+        display: none;
+    }
+
+    &__nav {
+        display: none;
+    }
+
+    @include break-xl {
+        height: 5rem;
+        padding: 1rem var(--ztk--layout--root-padding);
+
+        &__logo-1 {
+            display: none;
+        }
+
+        &__logo-2 {
+            display: block;
+            height: calc(3rem);
+            fill: currentColor;
+        }
+    }
+}

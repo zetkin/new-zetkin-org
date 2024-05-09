@@ -1,0 +1,17 @@
+.site-footer {
+    padding: 2rem var(--ztk--layout--root-padding);
+    color: var(--ztk--color--light-green-100);
+    background: var(--ztk--color--dark-green-700);
+
+    &__inner {
+        max-width: var(--ztk--layout--content-width);
+        margin: 0 auto;
+    }
+
+    &__logo {
+        display: block;
+        height: 4rem;
+        margin: 0 auto;
+        fill: currentColor;
+    }
+}

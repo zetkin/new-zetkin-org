@@ -10,8 +10,8 @@ function ztk_require_includes() {
 	// https://glotpress.trac.wordpress.org/ticket/211
 	natsort( $files );
 
-    foreach ( $files as $filepath ) {
-        require $filepath;
+	foreach ( $files as $filepath ) {
+		require $filepath;
 	}
 }
 

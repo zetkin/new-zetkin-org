@@ -1,0 +1,28 @@
+:root {
+    --ztk--color--black: #111111;
+    --ztk--color--white: #fafaf8;
+
+    --ztk--color--red-500: #C81E40;
+    --ztk--color--red-700: #980226;
+    --ztk--color--red-900: #5A0117;
+
+    --ztk--color--light-green-100: #D2F6E8;
+    --ztk--color--light-green-300: #9EEBCD;
+    --ztk--color--light-green-500: #6EE1B4;
+    --ztk--color--light-green-600: #64CDA4;
+
+    --ztk--color--dark-green-400: #0F5A5A;
+    --ztk--color--dark-green-700: #0A2828;
+
+    --ztk--color--purple-500: #3C006E;
+
+    --ztk--color--format-em: var(--ztk--color--light-green-500);
+
+    --ztk--font-family--main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --ztk--font-family--secondary: 'Playfair Display', serif;
+
+    --ztk--font-family--code: monaco, consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+    --ztk--font-family--pre: "Courier 10 Pitch", courier, monospace;
+
+    --ztk--layout--root-padding: 2rem;
+}

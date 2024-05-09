@@ -1,0 +1,23 @@
+@mixin break-sm {
+    @media (min-width: 37.5em) {
+        @content;
+    }
+}
+
+@mixin break-md {
+    @media (min-width: 48em) {
+        @content;
+    }
+}
+
+@mixin break-lg {
+    @media (min-width: 60em) {
+        @content;
+    }
+}
+
+@mixin break-xl {
+    @media (min-width: 75em) {
+        @content;
+    }
+}

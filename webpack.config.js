@@ -1,4 +1,5 @@
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
@@ -6,7 +7,17 @@ module.exports = {
 	entry() {
 		return {
 			...defaultConfig.entry(),
-			index: [ './src/js/index.js', './src/sass/index.scss' ],
+			editor: [
+				'./src/scripts/editor',
+				'./src/styles/editor/index.scss',
+			],
+			view: './src/scripts/view',
+			style: './src/styles/style/index.scss',
 		};
+	},
+	resolve: {
+		alias: {
+			'@zetkin': path.resolve( __dirname, 'src' ),
+		},
 	},
 };

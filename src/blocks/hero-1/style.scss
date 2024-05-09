@@ -1,0 +1,31 @@
+.wp-block-zetkin-hero-1 {
+    display: grid;
+    background: var(--ztk--color--red-500);
+    color: var(--ztk--color--white);
+    padding: 0 var(--ztk--layout--root-padding);
+    // gap: 1rem;
+
+    &__image {
+        display: block;
+        position: relative;
+        z-index: 0;
+        grid-column-start: 1;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        margin: 0 calc(var(--ztk--layout--root-padding) * -1);
+    }
+
+    &__title {
+        position: relative;
+        z-index: 1;
+        grid-column-start: 1;
+        grid-row-start: 2;
+        grid-row-end: 4;
+        margin: 0;
+        font-family: var(--ztk--font-family--main);
+        font-size: 4.5rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.14375rem;
+    }
+}

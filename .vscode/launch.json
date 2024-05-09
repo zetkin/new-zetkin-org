@@ -10,7 +10,7 @@
             "request": "launch",
             "port": 9003,
             "pathMappings": {
-                "/var/www/html/wp-content/themes/new-zetkin-theme": "${workspaceFolder}/"
+                "/var/www/html/wp-content/themes/new-zetkin-org": "${workspaceFolder}/"
             }
         }
     ]

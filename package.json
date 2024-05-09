@@ -9,7 +9,8 @@
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
     "start": "wp-scripts start",
-    "wp": "wp-env"
+    "wp": "wp-env",
+    "wp-cli": "wp-env run cli wp"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,11 @@
   "homepage": "https://github.com/zetkin/new-zetkin-org#readme",
   "devDependencies": {
     "@wordpress/env": "^9.2.0",
-    "@wordpress/scripts": "^27.7.0"
+    "@wordpress/scripts": "^27.7.0",
+    "eslint-import-resolver-webpack": "^0.13.8"
   },
   "dependencies": {
+    "@wordpress/icons": "^9.48.0",
     "@wordpress/server-side-render": "^4.33.0",
     "clsx": "^2.1.1",
     "normalize.css": "^8.0.1"
