@@ -1,1 +1,7 @@
-.wp-block-zetkin-hero-1 {}
+.wp-block-zetkin-hero-1 {
+    &__image {
+        aspect-ratio: 3/2;
+        object-fit: cover;
+        object-position: center center;
+    }
+}

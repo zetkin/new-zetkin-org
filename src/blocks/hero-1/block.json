@@ -5,6 +5,11 @@
 	"version": "0.1.0",
 	"title": "Zetkin Hero 1",
 	"category": "zetkin",
+	"allowedBlocks": [
+		"core/heading",
+		"core/paragraph",
+		"core/buttons"
+	],
 	"icon": "",
 	"description": "",
 	"example": {},
@@ -24,5 +29,5 @@
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js",
-    "render": "file:./render.php"
+	"render": "file:./render.php"
 }

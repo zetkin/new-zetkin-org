@@ -1,1 +1,1 @@
-import '../../formats/zetkin-emphasis';
+import '../../formats';
