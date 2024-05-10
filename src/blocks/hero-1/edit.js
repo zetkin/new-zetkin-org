@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { store as noticesStore } from '@wordpress/notices';
 import { image as icon } from '@wordpress/icons';
 
-import { name as zetkinEmphasis } from '@zetkin/formats/zetkin-emphasis';
+import { name as pinOut } from '@zetkin/formats/pin-out';
 
 import './editor.scss';
 
@@ -125,7 +125,7 @@ export default function Edit( props ) {
 						<RichText
 							className={ cn( '__title' ) }
 							placeholder={ __( 'Title' ) }
-							allowedFormats={ [ zetkinEmphasis ] }
+							allowedFormats={ [ pinOut ] }
 							value={ title }
 							onChange={ ( nextValue ) => {
 								setAttributes( { title: nextValue } );

@@ -14,30 +14,27 @@
 					"slug": "white",
 					"color": "#fafaf8"
 				},
-            {
+				{
 					"name": "Z Red 500",
 					"slug": "z-red-500",
 					"color": "#C81E40"
 				},
-            {
+				{
 					"name": "Z Purple 500",
 					"slug": "z-purple-500",
 					"color": "#3C006E"
 				},
-            {
+				{
 					"name": "Z Light Green 500",
-					"slug": "z-lightgreen-500",
+					"slug": "z-light-green-500",
 					"color": "#6EE1B4"
 				},
-            {
+				{
 					"name": "Z Dark Green 500",
-					"slug": "z-darkgreen-500",
+					"slug": "z-dark-green-500",
 					"color": "#285046"
 				}
 			]
 		}
 	}
 }
-
-
-

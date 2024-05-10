@@ -1,7 +1,7 @@
 import { registerFormatType } from '@wordpress/rich-text';
 
-import zetkinEmphasis from './zetkin-emphasis';
+import pinOut from './pin-out';
 
-[ zetkinEmphasis ].forEach( ( { name, ...def } ) => {
+[ pinOut ].forEach( ( { name, ...def } ) => {
 	registerFormatType( name, def );
 } );
