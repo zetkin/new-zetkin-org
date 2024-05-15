@@ -3,18 +3,26 @@
     font-weight: 400;
 }
 
-.has-z-red-500-zetkin-pin-out {
+.has-black-zetkin-pin-out {
+    color: var(--ztk--color--black);
+}
+
+.has-white-zetkin-pin-out {
+    color: var(--ztk--color--white);
+}
+
+.has-red-500-zetkin-pin-out {
     color: var(--ztk--color--red-500);
 }
 
-.has-z-light-green-500-zetkin-pin-out {
+.has-light-green-500-zetkin-pin-out {
     color: var(--ztk--color--light-green-500);
 }
 
-.has-z-dark-green-500-zetkin-pin-out {
+.has-dark-green-500-zetkin-pin-out {
     color: var(--ztk--color--dark-green-500);
 }
 
-.has-z-purple-500-zetkin-pin-out {
+.has-purple-500-zetkin-pin-out {
     color: var(--ztk--color--purple-500);
 }
