@@ -28,6 +28,7 @@ function ToolbarEditButton( { mediaId, mediaUrl, onSelectMedia } ) {
 				mediaURL={ mediaUrl }
 				allowedTypes={ ALLOWED_MEDIA_TYPES }
 				accept="image/*,video/*"
+				name={ mediaId ? __( 'Add Media' ) : __( 'Replace' ) }
 				onSelect={ onSelectMedia }
 			/>
 		</BlockControls>
