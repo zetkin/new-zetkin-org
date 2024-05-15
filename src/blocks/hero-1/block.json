@@ -14,7 +14,11 @@
 	"description": "",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		}
 	},
 	"textdomain": "ztk",
 	"attributes": {
