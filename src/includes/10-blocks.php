@@ -33,7 +33,7 @@ function ztk_require_blocks() {
 
 	foreach ( $files as $filepath ) {
 		// Skip directories starting with `_`.
-		if ( basename( dirname( $filepath ) )[0] === '_' ) {
+		if ( '_' === basename( dirname( $filepath ) )[0] ) {
 			continue;
 		}
 
