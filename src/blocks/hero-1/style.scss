@@ -2,8 +2,6 @@
 @import "~@zetkin/styles/mixins";
 
 .wp-block-zetkin-hero-1 {
-    background: var(--ztk--color--red-500);
-    color: var(--ztk--color--white);
     padding: 0 var(--ztk--layout--root-padding) 3rem;
 
     &__inner {
