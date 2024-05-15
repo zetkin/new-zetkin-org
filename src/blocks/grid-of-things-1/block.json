@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "zetkin/grid-of-things-1",
+	"version": "0.1.0",
+	"title": "Zetkin Grid of Things 1",
+	"category": "zetkin",
+	"allowedBlocks": [
+		"zetkin/grid-thing"
+	],
+	"icon": "",
+	"description": "",
+	"example": {},
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		}
+	},
+	"textdomain": "ztk",
+	"attributes": {
+		"mediaId": {
+			"type": "integer"
+		},
+		"kicker": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

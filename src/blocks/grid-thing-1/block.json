@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "zetkin/grid-thing-1",
+	"version": "0.1.0",
+	"title": "Grid Thing",
+	"category": "zetkin",
+	"icon": "",
+	"description": "",
+	"example": {},
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		}
+	},
+	"textdomain": "ztk",
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"content": {
+			"type": "string"
+		},
+		"url": {
+			"type": "string"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

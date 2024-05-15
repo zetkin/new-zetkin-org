@@ -1,0 +1,44 @@
+@import "~@zetkin/styles/functions";
+@import "~@zetkin/styles/mixins";
+
+.wp-block-zetkin-grid-thing-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+
+    &[href] {
+        transition: opacity 0.1s ease-in-out;
+    }
+
+    &[href]:hover {
+        opacity: 0.5;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: var(--ztk--font-family--main);
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.028em;
+    }
+
+    &__content {
+        font-family: var(--ztk--font-family--main);
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: -0.01875em;
+    }
+
+    &__read-more {
+        margin-top: auto;
+        font-family: var(--ztk--font-family--main);
+        font-size: 1.125rem;
+        font-weight: 700;
+        line-height: 1.5;
+        letter-spacing: -0.01875em;
+    }
+}
