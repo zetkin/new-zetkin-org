@@ -28,9 +28,7 @@
 	"render": "file:./render.php",
 
 	"attributes": {
-		"isInset": {
-			"type": "boolean",
-			"default": false
-		}
+
+		
 	}
 }

@@ -6,11 +6,13 @@ import {
 	MediaPlaceholder,
 	MediaReplaceFlow,
 	RichText,
+	InspectorControls,
 } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { store as noticesStore } from '@wordpress/notices';
 import { image as icon } from '@wordpress/icons';
+import { ToggleControl, PanelBody, PanelRow } from '@wordpress/components';
 
 // eslint-disable-next-line import/no-unresolved
 import { name as pinOut } from '@zetkin/formats/pin-out';
@@ -63,7 +65,7 @@ function PlaceholderContainer({ className, mediaUrl, onSelectMedia }) {
 export default function Edit(props) {
 	const { attributes, setAttributes } = props;
 
-	const { title, mediaId } = attributes;
+	const { title, mediaId, isInset } = attributes;
 
 	const hasImage = !!mediaId;
 
@@ -90,11 +92,36 @@ export default function Edit(props) {
 	};
 
 	const blockProps = useBlockProps({
-		className: [{ [cn('--has-image')]: hasImage }],
+		className: [
+			{ [cn('--has-image')]: hasImage },
+			{ [cn('--is-inset')]: isInset },
+		],
+	});
+
+	const innerBlocksProps = useInnerBlocksProps({
+		className: cn('__inner-blocks'),
 	});
 
 	return (
 		<>
+			<InspectorControls>
+				<PanelBody title={__('Layout Settings', 'text-domain')}>
+					<PanelRow>
+						<p>
+							{__(
+								'Make this block inset if positioned inside a zetkin-section.',
+								'text-domain',
+							)}
+						</p>
+						<ToggleControl
+							label="Make Inset"
+							checked={isInset}
+							onChange={(value) => setAttributes({ isInset: value })}
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>
+
 			<ToolbarEditButton
 				mediaId={mediaId}
 				mediaURL={mediaUrl}
