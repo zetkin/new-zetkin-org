@@ -1,11 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "zetkin/hero-1",
+	"name": "zetkin/section",
 	"version": "0.1.0",
-	"title": "Zetkin Hero 1",
+	"title": "Zetkin Section",
 	"category": "zetkin",
-	"allowedBlocks": ["core/heading", "core/paragraph", "core/buttons"],
 	"icon": "",
 	"description": "",
 	"example": {},
@@ -21,17 +20,17 @@
 		}
 	},
 	"textdomain": "ztk",
-	"attributes": {
-		"title": {
-			"type": "string"
-		},
-		"mediaId": {
-			"type": "integer"
-		}
-	},
+
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js",
-	"render": "file:./render.php"
+	"render": "file:./render.php",
+
+	"attributes": {
+		"isInset": {
+			"type": "boolean",
+			"default": false
+		}
+	}
 }

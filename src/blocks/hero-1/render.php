@@ -6,7 +6,7 @@ $title    = $attributes['title'];
 $cn = fn( $suffix = '') => "wp-block-zetkin-hero-1{$suffix}";
 
 ?>
-
+<!-- Hero Block -->
 <div <?php echo get_block_wrapper_attributes(); ?>>
 	<div class="<?php echo $cn( '__inner' ); ?>">
 		<div class="<?php echo $cn( '__image-container' ); ?>">
@@ -30,3 +30,4 @@ $cn = fn( $suffix = '') => "wp-block-zetkin-hero-1{$suffix}";
 		</div>
 	</div>
 </div>
+<!-- / Hero Block -->
