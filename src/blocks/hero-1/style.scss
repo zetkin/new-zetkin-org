@@ -29,6 +29,10 @@
         line-height: 1;
         letter-spacing: -0.0333em;
     }
+    &--is-inset{
+        margin: 50px;
+        border-radius: 64px;
+    }
 
     @include break-lg {
         padding: 15rem var(--ztk--layout--root-padding);

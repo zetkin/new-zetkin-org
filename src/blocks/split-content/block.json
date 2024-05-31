@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "zetkin/split-content",
+	"version": "0.1.0",
+	"title": "Zetkin Split Content",
+	"category": "zetkin",
+	"allowedBlocks": ["core/heading", "core/paragraph", "core/buttons"],
+	"icon": "",
+	"description": "",
+	"example": {},
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		},
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		}
+	},
+	"textdomain": "ztk",
+	"attributes": {
+		"mediaId": {
+			"type": "integer"
+		},
+		"isInset": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}
