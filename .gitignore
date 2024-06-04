@@ -3,3 +3,4 @@
 /vendor
 /zetkin-theme/build
 *.code-workspace
+.prettierrc
