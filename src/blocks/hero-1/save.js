@@ -9,7 +9,7 @@ export default function save(props) {
 
 	const blockProps = useBlockProps.save({
 		//className: isInset ? cn('--is-inset') : '',
-		className: 'boozo-the-clown',
+		//className: 'boozo-the-clown',
 	});
 
 	return (
