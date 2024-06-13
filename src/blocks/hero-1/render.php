@@ -1,13 +1,25 @@
 <?php
 
-$media_id = $attributes['mediaId'];
-$title    = $attributes['title'];
+$media_id = $attributes['mediaId'] ?? null;
+$title    = $attributes['title'] ?? null;
+$isInset = $attributes['isInset'] ?? false;
 
 $cn = fn( $suffix = '') => "wp-block-zetkin-hero-1{$suffix}";
+$cn = fn( $suffix = '') => "wp-block-zetkin-hero-1{$suffix}";
+
+$blockAttrs = get_block_wrapper_attributes(
+	array(
+		'class' => ztk_cx(
+			array(
+				$cn( '--is-inset' ) => $isInset,
+			)
+		),
+	)
+);
 
 ?>
-<!-- Hero Block -->
-<div <?php echo get_block_wrapper_attributes(); ?>>
+<!-- Hero Block here -->
+<div <?php echo $blockAttrs; ?>>
 	<div class="<?php echo $cn( '__inner' ); ?>">
 		<div class="<?php echo $cn( '__image-container' ); ?>">
 			<?php

@@ -93,7 +93,6 @@ export default function Edit(props) {
 
 	const blockProps = useBlockProps({
 		className: [
-			'funky',
 			{ [cn('--has-image')]: hasImage },
 			{ [cn('--is-inset')]: isInset },
 		],

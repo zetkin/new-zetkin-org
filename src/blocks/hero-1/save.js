@@ -7,10 +7,7 @@ export default function save(props) {
 	const { isInset } = attributes;
 	console.log(isInset);
 
-	const blockProps = useBlockProps.save({
-		//className: isInset ? cn('--is-inset') : '',
-		//className: 'boozo-the-clown',
-	});
+	const blockProps = useBlockProps.save();
 
 	return (
 		<div {...blockProps}>
