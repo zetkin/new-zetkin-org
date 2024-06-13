@@ -20,7 +20,7 @@ $blockAttrs = get_block_wrapper_attributes(
 ?>
 <!-- Hero Block here -->
 <div <?php echo $blockAttrs; ?>>
-	<div class="<?php echo $cn( '__inner' ); ?>">
+	<div class="<?php echo $cn( '__inner' ); ?> ">
 		<div class="<?php echo $cn( '__image-container' ); ?>">
 			<?php
 			ztk_media_img(
