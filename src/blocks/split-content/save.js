@@ -1,21 +1,17 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-const Save = ({ attributes }) => {
-	const { imageURL } = attributes;
+const cn = (suffix = '') => 'wp-block-zetkin-split-content' + suffix;
+
+export default function save(props) {
+	const { attributes } = props;
+	const { isInset } = attributes;
+	console.log(isInset);
+
 	const blockProps = useBlockProps.save();
 
 	return (
 		<div {...blockProps}>
-			<div className="container">
-				<div className="inner-blocks">
-					<InnerBlocks.Content />
-				</div>
-				<div className="image-container">
-					{imageURL && <img src={imageURL} alt="Selected" />}
-				</div>
-			</div>
+			<InnerBlocks.Content />
 		</div>
 	);
-};
-
-export default Save;
+}

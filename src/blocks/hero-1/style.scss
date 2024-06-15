@@ -29,11 +29,11 @@
 		line-height: 1;
 		letter-spacing: -0.0333em;
 	}
-	&--is-inset {
+/* 	&--is-inset {
 		margin: 50px;
 		border-radius: 64px;
         overflow: hidden
-	}
+	} */
 
 	@include break-md {
 		&__inner {

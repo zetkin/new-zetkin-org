@@ -22,6 +22,10 @@
 	},
 	"textdomain": "ztk",
 	"attributes": {
+		"blockSlug": {
+			"type": "string",
+			"default": "wp-block-zetkin-hero-1"
+		},
 		"title": {
 			"type": "string"
 		},

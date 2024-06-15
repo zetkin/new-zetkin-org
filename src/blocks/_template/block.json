@@ -9,14 +9,26 @@
 	"description": "",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		},
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		}
 	},
 	"textdomain": "ztk",
 	"attributes": {
-
+		"blockSlug": {
+			"type": "string",
+			"default": "my_block_slug"
+		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js"
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
 }

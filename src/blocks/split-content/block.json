@@ -22,12 +22,23 @@
 	},
 	"textdomain": "ztk",
 	"attributes": {
+		"blockSlug": {
+			"type": "string",
+			"default": "wp-block-zetkin-split-content"
+		},
+		"title": {
+			"type": "string"
+		},
 		"mediaId": {
 			"type": "integer"
 		},
 		"isInset": {
 			"type": "boolean",
 			"default": false
+		},
+		"imgPos": {
+			"type": "string",
+			"default": "--imgPosLeft"
 		}
 	},
 	"editorScript": "file:./index.js",

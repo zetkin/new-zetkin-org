@@ -28,4 +28,9 @@
     --ztk--layout--content-max-width: 90rem;
 
     --ztk--layout--content-width: min(var(--ztk--layout--content-max-width), 100vw - 2 * var(--ztk--layout--root-padding));
+
+    
 }
+
+$flex-W-Space: max(2rem, 12vw);
+$half-flex-W-Space: max(1rem, 6vw);

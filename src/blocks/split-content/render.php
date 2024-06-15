@@ -1,17 +1,49 @@
 <?php
-function render_split_content_block( $attributes, $content ) {
-    $image_url = isset( $attributes['imageURL'] ) ? $attributes['imageURL'] : '';
-    
 
-    $imageTag = $image_url ? '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr__( 'Selected image', 'custom-block' ) . '">' : '';
+$blockSlug = $attributes['blockSlug'] ?? null;
 
-    return 
-		'<!-- split again -->
-				<div ' . get_block_wrapper_attributes() . '>
-        	<div class="container">
-            <div class="inner-blocks">' . $content . '</div>
-            <div class="image-container">' . $imageTag . '</div>
-        </div>
-    </div>
-	<!-- / split again -->';
-}
+$media_id = $attributes['mediaId'] ?? null;
+$title    = $attributes['title'] ?? null;
+$isInset = $attributes['isInset'] ?? false;
+$imgPos = $attributes['imgPos'] ?? '--imgPosLeft';
+
+$cn = fn ($suffix = '') => $blockSlug.$suffix;
+$cn = fn ($suffix = '') => $blockSlug.$suffix;
+
+$blockAttrs = get_block_wrapper_attributes(
+	array(
+		'class' => ztk_cx(
+			array(
+				$cn('--is-inset') => $isInset,
+				
+			)
+		),
+	)
+);
+
+?>
+<!-- Split Block -->
+<div <?php echo $blockAttrs; ?>>
+	<div class="<?php echo $cn('__inner'); ?> <?php echo $cn($imgPos);?>">
+		<div class="<?php echo $cn('__image-container'); ?>  ">
+			<?php
+			ztk_media_img(
+				$media_id,
+				'3_2',
+				array(
+					'class' => $cn('__image'),
+				)
+			);
+			?>
+		</div>
+
+		<div class="<?php echo $cn('__content-container'); ?>">
+			<h1 class="<?php echo $cn('__title'); ?>"><?php echo $title; ?></h1>
+
+			<div class="<?php echo $cn('__inner-blocks'); ?>">
+				<?php echo $content; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- / Split Block -->

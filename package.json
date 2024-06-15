@@ -37,6 +37,7 @@
 		"@wordpress/icons": "^9.48.0",
 		"@wordpress/server-side-render": "^4.33.0",
 		"clsx": "^2.1.1",
-		"normalize.css": "^8.0.1"
+		"normalize.css": "^8.0.1",
+		"react": "^18.3.1"
 	}
 }

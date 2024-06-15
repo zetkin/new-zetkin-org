@@ -1,0 +1,8 @@
+
+
+[class*='--is-inset'] {
+	margin: $half-flex-W-Space;
+	padding: $half-flex-W-Space;
+	border-radius: max(1rem, 4vw);
+	overflow: hidden;
+};
