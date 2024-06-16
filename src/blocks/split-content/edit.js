@@ -107,7 +107,7 @@ export default function Edit(props) {
 	});
 
 	const innerBlocksProps = useInnerBlocksProps({
-		className: [cn('__inner-blocks'), { [cn(imgPos)]: imgPos }],
+		className: [cn('__inner-blocks')],
 	});
 
 	return (

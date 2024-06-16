@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "zetkin/post-load-test",
+	"version": "0.1.0",
+	"title": "Zetkin Post Load test",
+	"category": "zetkin",
+	"icon": "",
+	"description": "",
+	"example": {},
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": true
+		},
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		}
+	},
+	"textdomain": "ztk",
+	"attributes": {
+		"blockSlug": {
+			"type": "string",
+			"default": "zetkin-post-load-test"
+		},
+		"taxonomy": {
+			"type": "string",
+			"default": ""
+		},
+		"term": {
+			"type": "string",
+			"default": ""
+		},
+		"selectedPost": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}
