@@ -57,6 +57,17 @@ export default function Edit({ attributes, setAttributes }) {
 							apiFetch({ path: `/wp/v2/media/${posts[0].featured_media}` })
 								.then((media) => {
 									setFeaturedImage(media.source_url);
+									// Send data to render.php
+									fetch('render.php', {
+										method: 'POST',
+										headers: {
+											'Content-Type': 'application/json',
+										},
+										body: JSON.stringify({
+											title: posts[0].title.rendered,
+											image: media.source_url,
+										}),
+									});
 								})
 								.catch(() => {
 									setFeaturedImage('');

@@ -36,6 +36,12 @@
 		"selectedPost": {
 			"type": "string",
 			"default": ""
+		},
+		"postTitle": {
+			"type": "string"
+		},
+		"featuredImage": {
+			"type": "string"
 		}
 	},
 	"editorScript": "file:./index.js",
