@@ -7,7 +7,7 @@ $title    = $attributes['title'] ?? null;
 $isInset = $attributes['isInset'] ?? false;
 
 $cn = fn ($suffix = '') => $blockSlug.$suffix;
-$cn = fn ($suffix = '') => $blockSlug.$suffix;
+
 
 $blockAttrs = get_block_wrapper_attributes(
 	array(

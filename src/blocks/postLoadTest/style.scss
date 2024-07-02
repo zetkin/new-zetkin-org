@@ -1,2 +1,17 @@
-.wp-block-zetkin- {
+.zetkin-post-load {
+	
+	&__inner {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
+		grid-gap: 2em;
+	}
+
+	&__post {
+		overflow: hidden;
+	
+		&-image-container {
+			aspect-ratio: 1/1;
+			overflow: hidden;
+		}
+	}
 }

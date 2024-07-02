@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "zetkin/post-load-test",
+	"name": "zetkin/post-load",
 	"version": "0.1.0",
-	"title": "Zetkin Post Load test",
+	"title": "Zetkin Post Load",
 	"category": "zetkin",
 	"icon": "",
 	"description": "",
@@ -23,7 +23,7 @@
 	"attributes": {
 		"blockSlug": {
 			"type": "string",
-			"default": "zetkin-post-load-test"
+			"default": "zetkin-post-load"
 		},
 		"taxonomy": {
 			"type": "string",
