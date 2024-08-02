@@ -1,43 +1,44 @@
 {
-	"name": "new-zetkin-org",
-	"version": "1.0.0",
-	"description": "New website for Zetkin Foundation",
-	"main": "index.js",
-	"scripts": {
-		"build": "wp-scripts build",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-		"format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"start": "wp-scripts start",
-		"wp": "wp-env",
-		"wp-cli": "wp-env run cli wp"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com/zetkin/new-zetkin-org.git"
-	},
-	"author": "",
-	"license": "UNLICENSED",
-	"bugs": {
-		"url": "https://github.com/zetkin/new-zetkin-org/issues"
-	},
-	"private": true,
-	"homepage": "https://github.com/zetkin/new-zetkin-org#readme",
-	"devDependencies": {
-		"@wordpress/env": "^9.2.0",
-		"@wordpress/scripts": "^27.9.0",
-		"eslint": "^8.57.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-import-resolver-webpack": "^0.13.8",
-		"eslint-plugin-prettier": "^5.1.3",
-		"prettier": "^3.2.5"
-	},
-	"dependencies": {
-		"@wordpress/icons": "^9.48.0",
-		"@wordpress/server-side-render": "^4.33.0",
-		"clsx": "^2.1.1",
-		"normalize.css": "^8.0.1",
-		"react": "^18.3.1"
-	}
+  "name": "new-zetkin-org",
+  "version": "1.0.0",
+  "description": "New website for Zetkin Foundation",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "wp": "wp-env",
+    "wp-cli": "wp-env run cli wp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zetkin/new-zetkin-org.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/zetkin/new-zetkin-org/issues"
+  },
+  "private": true,
+  "homepage": "https://github.com/zetkin/new-zetkin-org#readme",
+  "devDependencies": {
+    "@wordpress/env": "^9.10.0",
+    "@wordpress/scripts": "^28.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-webpack": "^0.13.8",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "@wordpress/icons": "^10.4.0",
+    "@wordpress/server-side-render": "^4.35.0",
+    "clsx": "^2.1.1",
+    "normalize.css": "^8.0.1",
+    "react": "^18.3.1",
+    "watch": "^1.0.2"
+  }
 }
