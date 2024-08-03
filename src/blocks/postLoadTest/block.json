@@ -42,6 +42,10 @@
 		},
 		"featuredImage": {
 			"type": "string"
+		},
+		"numberOfPosts": {
+			"type": "number",
+			"default": 1	
 		}
 	},
 	"editorScript": "file:./index.js",

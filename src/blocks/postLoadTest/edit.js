@@ -7,8 +7,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 // Define the Edit function, which is the main component of this file
 export default function Edit({ attributes, setAttributes }) {
-	// Destructure the attributes object to get the taxonomy and term values
-	const { taxonomy, term } = attributes;
+	// Destructure the attributes object to get the taxonomy, term, and numberOfPosts values
+	const { taxonomy, term, numberOfPosts } = attributes;
 
 	// Define state variables for taxonomies, terms, postTitle, and featuredImage
 	const [taxonomies, setTaxonomies] = useState([]);
@@ -100,6 +100,11 @@ export default function Edit({ attributes, setAttributes }) {
 		setAttributes({ term: newTerm });
 	};
 
+	// Define the handleChangeNumber function, which updates the numberOfPosts
+	const handleChangeNumber = (newNumber) => {
+		setAttributes({ numberOfPosts: newNumber });
+	};
+
 	// Render the component
 	return (
 		<>
@@ -119,6 +124,17 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={handleChangeTerm}
 						/>
 					)}
+					<SelectControl
+						label={__('Number of posts', 'your-theme')}
+						value={numberOfPosts}
+						options={[
+							{ label: '1', value: '1' },
+							{ label: '2', value: '2' },
+							{ label: '3', value: '3' },
+							{ label: '4', value: '4' },
+						]}
+						onChange={handleChangeNumber}
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
